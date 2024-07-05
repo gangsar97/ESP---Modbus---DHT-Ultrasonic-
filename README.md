@@ -1,4 +1,4 @@
-Device yang dapat mengukur Suhu, Kelembaban, dan Jarak
+Device yang dapat mengukur Suhu, Kelembaban, dan Jarak dengan protokol komunikasi Modbus RTU
 
 Sensor yang digunakan adalah:
    * DHT 22
