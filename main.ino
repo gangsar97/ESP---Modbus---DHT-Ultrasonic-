@@ -1,4 +1,3 @@
-#include <SoftwareSerial.h>
 #include <ModbusRTU.h>
 #include <DHT.h>
 
@@ -35,14 +34,12 @@ class HCSR04 {
 
 
 // DHT22 config
-#define DHTPIN 2
+#define DHTPIN 5
 #define DHTTYPE DHT22
 
-// software serial config
-#define RX_pin 14
-#define TX_pin 12
+// Modbus serial config
 #define BAUD_RATE 9600
-#define PARITY SWSERIAL_8N1
+#define PARITY SERIAL_8N1
 
 // modbus data address
 #define SLAVE_ID 1
@@ -51,11 +48,10 @@ class HCSR04 {
 #define IReg_dist_address 3
 
 //ultrasonic HCSR04 config
-#define triggerPin 5
-#define echoPin 4
+#define triggerPin 14
+#define echoPin 12
 
 HCSR04 ultrasonic(triggerPin, echoPin);
-SoftwareSerial swSerial(RX_pin, TX_pin);
 ModbusRTU modbus;
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -63,11 +59,11 @@ void setup() {
   Serial.begin(9600);
   dht.begin();
   ultrasonic.begin();
-  
-  swSerial.begin(BAUD_RATE, PARITY);
-  modbus.begin(&swSerial);
+
+  Serial1.begin(BAUD_RATE, PARITY);
+  modbus.begin(&Serial1);
   modbus.slave(SLAVE_ID);
-  
+
   modbus.addIreg(IReg_temp_address);
   modbus.addIreg(IReg_hum_address);
   modbus.addIreg(IReg_dist_address);
@@ -96,5 +92,5 @@ void loop() {
   modbus.Ireg(IReg_dist_address, distance);
 
   modbus.task();
-  delay(1000);
+  delay(500);
 }
