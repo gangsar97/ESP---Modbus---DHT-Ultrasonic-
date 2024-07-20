@@ -38,6 +38,8 @@ class HCSR04 {
 #define DHTTYPE DHT22
 
 // Modbus serial config
+#define RX_PIN 16
+#define TX_PIN 17
 #define BAUD_RATE 9600
 #define PARITY SERIAL_8N1
 
@@ -60,8 +62,8 @@ void setup() {
   dht.begin();
   ultrasonic.begin();
 
-  Serial1.begin(BAUD_RATE, PARITY);
-  modbus.begin(&Serial1);
+  Serial2.begin(BAUD_RATE, PARITY, RX_PIN, TX_PIN);
+  modbus.begin(&Serial2);
   modbus.slave(SLAVE_ID);
 
   modbus.addIreg(IReg_temp_address);
