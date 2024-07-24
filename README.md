@@ -1,8 +1,10 @@
 Device yang dapat mengukur Suhu, Kelembaban, dan Jarak dengan protokol komunikasi Modbus RTU
 
-Sensor yang digunakan adalah:
-   * DHT 22
+Komponen yang digunakan adalah:
+   * ESP32
+   * DHT 22 / DHT 11
    * HC-SR04
+   * RS-485 to UART Converter
      
 Library yang digunakan:
    * DHT-sensor-library by Adafruit https://github.com/adafruit/DHT-sensor-library
